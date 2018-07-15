@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<style>
+	.valor,.cima,.baixo{
+	width:50px;
+	}
+	
+	.valor{
+	text-align:center;	
+	}
+	
+	
+	header{
+		font-family: arial black;
+	}
+	header a {
+	
+		color:#fff;
+	}
+
+	#caixaDescricao{
+		border: 2px solid blue;
+		text-align: justify;
+		margin-right: 10%;
+		margin-left: 10%;
+		margin-top: 2%;
+	}
+	#descricao{
+		margin-right: 5%;
+		margin-left: 5%;
+	}
+	#radioButtons{
+		margin-top: 5%;
+		margin-left: 5%;
+	}
+
+</style>
+
+<script src="Chart.min.js"></script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Demanda</title>
+<!-- Bootstrap -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="estilo.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<header>
+	 <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
+      <div class="container">
+
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Microeconomia <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="apresentacao_demanda.html">Demanda</a></li>
+              <li><a href="apresentacao_oferta.html">Oferta</a></li>
+              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
+              <li><a href="elasticidade.html">Elasticidade</a></li>
+         
+            </ul>
+          </li>  
+          
+        </ul>
+          
+          
+      </div>
+       
+    </nav>
+
+	</header>
+	<!--CONTEÚDO -->
+	<section id="conteudo" style="margin:5%">  
+		<div class="container">
+			<div class="col-sm-6">
+				<h3>Oferta e Demanda</h3>
+				
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class="col-sm-3" style="margin-top: 10px">
+
+				 <fieldset>
+				  <legend>Oferta:</legend>
+			
+				<div id="botaoSetas">
+					<button type="button"  id="cima1" onclick="aumentarvalor();" class=" cima btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+				
+					</br>
+					<input id="valor1" value="0" class="valor" type="text" readonly>&nbsp Valor Inicial </br>
+					<button type="button" id="baixo1"class="baixo btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					
+				</div>
+				
+
+				<br>
+				
+				
+				
+				<div id="botaoSetas">
+					<button type="button"  id="cima2" class=" cima btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+					
+					</br>
+					<input id="valor2" value="0" class="valor" type="text" readonly>&nbsp Incremento por unidade </br>
+					<button type="button" id="baixo2"class="baixo btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					
+				</div>
+				
+				</fieldset>
+				</div>
+				
+				<div  class="col-sm-3" style="margin-top: 10px">
+				<fieldset>
+				  <legend>Demanda:</legend>
+				<div id="botaoSetas">
+					<button type="button"  id="cima3" class=" cima btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+				
+					</br>
+					<input id="valor3" value="50" class="valor" type="text" readonly>&nbsp Valor Inicial</br>
+					<button type="button" id="baixo3"class="baixo btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					
+				</div>
+				<br>
+					
+				
+				<div id="botaoSetas">
+					<button type="button"  id="cima4" class=" cima btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+				
+					</br>
+					<input id="valor4" value="0" class="valor" type="text" readonly> &nbsp Decremento por unidade </br>
+					<button type="button" id="baixo4" class="baixo btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					
+				</div>
+				</fieldset>
+				
+			</div>
+		
+
+		</div>
+
+	</section>
+
+					<script>
+				document.getElementById("baixo1").onclick = function() { diminuivalor1();}
+				document.getElementById("cima1").onclick = function() { aumentarvalor1();}
+					
+				function geraVetorDemanda(){
+				
+				for 
+				
+				
+				
+				}
+					
+				function geraVetorOferta(){
+
+
+
+
+
+				}
+					
+					
+					function aumentarvalor1(){
+					 var valor1 = document.getElementById("valor1").value;
+					 var valorInt = parseInt(valor1);
+					 if (valorInt <= 95) {
+					     valorInt += 5;
+						 document.getElementById("valor1").value = valorInt;
+						}
+						
+						
+					}
+					
+					function diminuivalor1(){
+					 var valor1 = document.getElementById("valor1").value;
+					 var valorInt = parseInt(valor1);
+					 if (valorInt > 0) {
+					     valorInt -= 5;
+						 document.getElementById("valor1").value = valorInt;
+						}
+						
+						
+					}
+					
+					
+					
+							document.getElementById("baixo2").onclick = function() { diminuivalor2();}
+				document.getElementById("cima2").onclick = function() { aumentarvalor2();}
+					
+					
+					function aumentarvalor2(){
+					 var valor2 = document.getElementById("valor2").value;
+					 var valorInt = parseInt(valor2);
+					 if (valorInt <= 95) {
+					     valorInt += 5;
+						 document.getElementById("valor2").value = valorInt;
+						}
+						
+						
+					}
+					
+					function diminuivalor2(){
+					 var valor2 = document.getElementById("valor2").value;
+					 var valorInt = parseInt(valor2);
+					 if (valorInt > 0) {
+					     valorInt -= 5;
+						 document.getElementById("valor2").value = valorInt;
+						}
+						
+						
+					}
+					
+					
+							document.getElementById("baixo3").onclick = function() { diminuivalor3();}
+				document.getElementById("cima3").onclick = function() { aumentarvalor3();}
+					
+					
+					function aumentarvalor3(){
+					 var valor3 = document.getElementById("valor3").value;
+					 var valorInt = parseInt(valor3);
+					 if (valorInt <= 95) {
+					     valorInt += 5;
+						 document.getElementById("valor3").value = valorInt;
+						}
+						
+						
+					}
+					
+					function diminuivalor3(){
+					 var valor3 = document.getElementById("valor3").value;
+					 var valorInt = parseInt(valor3);
+					 if (valorInt > 0) {
+					     valorInt -= 5;
+						 document.getElementById("valor3").value = valorInt;
+						}
+						
+						
+					}
+					
+					
+					
+					
+					
+					
+							document.getElementById("baixo4").onclick = function() { diminuivalor4();}
+				document.getElementById("cima4").onclick = function() { aumentarvalor4();}
+					
+					
+					function aumentarvalor4(){
+					 var valor4 = document.getElementById("valor4").value;
+					 var valorInt = parseInt(valor4);
+					 if (valorInt <= 95) {
+					     valorInt += 5;
+						 document.getElementById("valor4").value = valorInt;
+						}
+						
+						
+					}
+					
+					function diminuivalor4(){
+					 var valor4 = document.getElementById("valor4").value;
+					 var valorInt = parseInt(valor4);
+					 if (valorInt > 0) {
+					     valorInt -= 5;
+						 document.getElementById("valor4").value = valorInt;
+						}
+						
+						
+					}
+					
+					
+					
+					var ctx = document.getElementById('myChart').getContext('2d');
+							var graficoBase = defineMinhaConfig("Dolly", "Demanda X Oferta");
+							var chart = new Chart(ctx, graficoBase );
+					
+							
+
+		
+
+		function defineMinhaConfig(mylabel, x ){  
+
+			var config = {
+				type: 'line',
+
+			// The data for our dataset
+			data: {
+
+				labels: [0,1, 2, 3, 4,5,6],
+				datasets: [{
+					label: "demanda",
+					borderColor: 'rgb(255, 69, 132)',
+					data: [null,25,20,15,10,5,null],
+				},
+				{
+					label: "oferta",
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,5,10,15,20,25,null],
+				},
+				
+				
+				]
+			},
+			
+			options: {
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Q(i)',
+							data: [20,30,50]
+						}
+					}],
+					yAxes: [{
+						display: true,
+						ticks: {
+							beginAtZero: true,
+							steps: 10,
+							stepValue: 5,
+							max: 30
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'P(i)'
+						}
+					}]
+				},
+				title: {
+					display: true,
+					text: x
+				}
+			}
+		};
+		return config;	
+	}
+				
+	
+	
+	
+						
+						</script>
+
+
+
+
+						<!--Rodapé -->
+						<footer id="rodape">
+
+						</footer>
+
+						<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+						<script src="jquery.min.js"></script>
+
+						<!-- Include all compiled plugins (below), or include individual files as needed -->
+						<script src="bootstrap/js/bootstrap.min.js"></script>
+					</body>
+					</html>

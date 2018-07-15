@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<style>
+	header{
+		font-family: arial black;
+	}
+	header a {
+	
+		color:#fff;
+	}
+
+	#caixaDescricao{
+		border: 2px solid blue;
+		text-align: justify;
+		margin-right: 10%;
+		margin-left: 10%;
+		margin-top: 2%;
+	}
+	#descricao{
+		margin-right: 5%;
+		margin-left: 5%;
+	}
+	#radioButtons{
+		margin-top: 5%;
+		margin-left: 5%;
+	}
+
+</style>
+
+<script src="Chart.min.js"></script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Demanda</title>
+<!-- Bootstrap -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="estilo.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body onload="troca()">
+	<header>
+		 <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
+      <div class="container">
+
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Microeconomia <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="apresentacao_demanda.html">Demanda</a></li>
+              <li><a href="apresentacao_oferta.html">Oferta</a></li>
+              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
+				<li><a href="elasticidade.html">Elasticidade</a></li>	
+            </ul>
+          </li>  
+          
+        </ul>
+          
+          
+      </div>
+       
+    </nav>
+
+	</header>
+	<!--CONTEÚDO -->
+	<section id="conteudo" style="margin:5%">  
+		<div class="container">
+			<div class="col-sm-8">
+				<h3>Demanda </h3>
+				<h4 id="titulo" >BENS SUBSTITUTOS </h4>
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class="col-sm-4" style="margin-top: 10px">
+
+
+
+
+				<select id="opcoes" onchange="troca()">
+					<option value="BENS SUBSTITUTOS">BENS SUBSTITUTOS</option>
+					<option value="BENS COMPLEMENTARES">BENS COMPLEMENTARES</option>
+					<option value="RENDA DO CONSUMIDOR">RENDA DO CONSUMIDOR</option>
+					<option value="PREFERÊNCIA, GOSTO E HÁBITO">PREFERÊNCIA, GOSTO E HÁBITO</option>
+				</select>
+				<br>
+
+				<form id="radioButtons" style="display: none" >
+					<br>
+					<input id="bemNormal" type="radio" name="renda" value="normal"> Bem Normal<br>
+					<input id="bemInferior" type="radio"  name="renda" value="inferior"> Bem Inferior<br>
+					<input id="bemNeutro" type="radio"  name="renda" value="neutro"> Bem Neutro
+					<br>	
+				</form>	
+	
+
+
+				<br>
+				<p id="produto">  </p>
+
+
+				<div id="botaoSetas">
+					<button type="button"  id="cima" class="btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoSobe" style="display: inline"></p>
+					<br>
+
+					<button type="button" id="baixo"class="btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoDesce" style="display: inline"></p>
+				</div>
+				<br>
+				<br>
+				<button type="button" id="reseta"  onclick="troca()" class="btn btn-default" aria-label="seta pra baixo">
+					Resetar
+				</button>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="caixaDescricao">
+						<p id="descricao"> </p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<script>
+
+		function troca(){
+			var x = document.getElementById("opcoes").value;
+			document.getElementById("titulo").innerHTML = x;
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var graficoBase;
+			var produto;
+			var descricao;
+			var chart;
+			var desc_cima;
+			var desc_baixo;
+			var textoBotaoSobe;
+			var textoBotaoDesce;
+			switch(x) {
+				case "BENS SUBSTITUTOS":
+				document.getElementById("radioButtons").style.display = "none";
+				document.getElementById("botaoSetas").style.display  = "block";
+				document.getElementById("produto").style.display  = "inline";
+				graficoBase = defineMinhaConfig("Dolly", x);
+				chart = new Chart(ctx, graficoBase );
+				produto = "Produto substituto: Itubaina";
+				textoBotaoSobe = "Aumenta o preço da Itubaína";
+				textoBotaoDesce = "Diminui o preço da Itubaína";
+
+				descricao = "Bens substitutos: o consumo de um bem substitui o consumo do outro. Ou seja, há uma"+
+				" relação entre a variação do preço da Itubaína com o preço (pi) e quantidade demandada (qi) do Dolly. Selecione uma das setas para ver o que acontece.";  
+				desc_cima = "Dado que o preço do Dolly se mantém, a quantidade demandada dele aumenta se o preço da Itubaína aumenta."+
+				"Podemos ver isso graficamente com a reta dele andando para a direita.";
+				desc_baixo = "Dado que o preço do Dolly se mantém, a quantidade demandada dele diminui se o preço da Itubaína diminui. "+
+				"Podemos ver isso graficamente com a reta dele andando para a esquerda.";
+				
+				document.getElementById("baixo").onclick = function() { bens_substitutos_pra_baixo(graficoBase,chart, desc_baixo);}
+				document.getElementById("cima").onclick = function() { bens_substitutos_pra_cima(graficoBase,chart, desc_cima);}
+
+
+				break;
+				case "BENS COMPLEMENTARES":
+				document.getElementById("radioButtons").style.display = "none";
+				document.getElementById("botaoSetas").style.display  = "block";
+				document.getElementById("produto").style.display  = "inline";
+				graficoBase = defineMinhaConfig("HDs", x);
+				chart = new Chart(ctx, graficoBase );
+				produto = "Produto complementar: Computador";
+				textoBotaoSobe = "Aumenta o preço dos computadores";
+				textoBotaoDesce = "Diminui o preço dos computadores";
+				
+				descricao =  "Bens complementares: são bens consumidos em conjunto. Ou seja, há uma relação entre a variação do preço dos computadores com o preço (pi) " +
+				"e a quantidade demandada (qi) de HDs. Selecione uma das setas para ver o que acontece.";
+				desc_cima = "Dado que o preço dos HDs se mantém, a quantidade demandada dele diminui se o preço dos computadores aumenta. Podemos ver isso graficamente com a reta dele andando para a esquerda.";
+				desc_baixo = "Dado que o preço dos HDs se mantém, a quantidade demandada dele aumenta se o preço dos computadores diminui. Podemos ver isso graficamente com a reta dele andando para a direita.";
+				
+				document.getElementById("baixo").onclick = function() { bens_complementares_pra_baixo(graficoBase,chart, desc_baixo);}
+				document.getElementById("cima").onclick = function() { bens_complementares_pra_cima(graficoBase,chart, desc_cima);}
+							
+				break;
+				
+				case "RENDA DO CONSUMIDOR":
+				document.getElementById("radioButtons").style.display = "block";
+				document.getElementById("botaoSetas").style.display  = "none";
+				document.getElementById("produto").style.display  = "none";
+				graficoBase = defineMinhaConfig("Bens", x);
+				chart = new Chart(ctx, graficoBase );
+				descricao = "Renda do consumidor: a variação da renda dos consumidores influencia na demanda de alguns bens: bens normais"+
+				" e bens inferiores. Os bens neutros não são influenciados pela variação da renda. Selecione algum tipo de bem para ver o que acontece.";
+				
+				document.getElementById("bemNormal").onclick = function(){
+					document.getElementById("radioButtons").style.display = "block";
+					document.getElementById("botaoSetas").style.display  = "block";
+					document.getElementById("produto").style.display  = "inline";
+					graficoBase = defineMinhaConfig("Manteiga", x);
+					chart = new Chart(ctx, graficoBase );
+					var descricao = "Bem normal: o aumento da renda dos consumidores leva ao aumento da demanda desse bem. Por exemplo, há uma"+ 
+					" relação entre a variação da renda do consumidor com a quantidade demandada (qi) da manteiga. Selecione uma das setas para"+
+					" ver o que acontece.";
+					textoBotaoSobe = "Aumenta a renda dos consumidores";
+					textoBotaoDesce = "Diminui a renda dos consumidores";
+					var produto = "Bem normal: Manteiga";
+
+					var desc_cima = "Dado que o preço da manteiga se mantém, a quantidade demandada dela aumenta se a renda dos consumidores aumenta."+
+					" Podemos ver isso graficamente com a reta dele andando para a direita.";
+					var desc_baixo = "Dado que o preço da manteiga se mantém, a quantidade demandada dela diminui se a renda dos consumidores diminui."+
+					" Podemos ver isso graficamente com a reta dele andando para a esquerda.";
+					
+					document.getElementById("baixo").onclick = function() { bem_normal_pra_baixo(graficoBase,chart, desc_baixo);}
+					document.getElementById("cima").onclick = function() { bem_normal_pra_cima(graficoBase,chart, desc_cima);}
+					
+					document.getElementById("produto").innerHTML = produto;	
+					document.getElementById("descricao").innerHTML = descricao;	
+					document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+					document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+				}
+				
+				document.getElementById("bemInferior").onclick = function(){
+					document.getElementById("radioButtons").style.display = "block";
+					document.getElementById("botaoSetas").style.display  = "block";
+					document.getElementById("produto").style.display  = "inline";
+					graficoBase = defineMinhaConfig("Margarina", x);
+					chart = new Chart(ctx, graficoBase );
+					var descricao = "Bem inferior: o aumento da renda dos consumidores leva à redução da demanda desse bem. Por exemplo,"+
+					"há uma relação entre a variação da renda do consumidor com a quantidade demandada (qi) da margarina. Selecione uma das"+
+					"setas para ver o que acontece.";
+					textoBotaoSobe = "Aumenta a renda dos consumidores";
+					textoBotaoDesce = "Diminui a renda dos consumidores";
+					var produto = "Bem inferior: Margarina";
+
+					var desc_cima = "Dado que o preço da margarina se mantém, a quantidade demandada dela diminui se a renda dos consumidores aumenta."+
+					"Podemos ver isso graficamente com a reta dele andando para a esquerda.";
+					var desc_baixo = "Dado que o preço da margarina se mantém, a quantidade demandada dela aumenta se a renda dos consumidores diminui."+
+					"Podemos ver isso graficamente com a reta dele andando para a direita.";
+					
+					document.getElementById("baixo").onclick = function() { bem_inferior_pra_baixo(graficoBase,chart, desc_baixo);}
+					document.getElementById("cima").onclick = function() { bem_inferior_pra_cima(graficoBase,chart, desc_cima);}
+					
+					document.getElementById("produto").innerHTML = produto;	
+					document.getElementById("descricao").innerHTML = descricao;	
+					document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+					document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+				}
+				document.getElementById("bemNeutro").onclick = function(){
+					document.getElementById("botaoSetas").style.display  = "none";
+					document.getElementById("radioButtons").style.display = "block";
+					document.getElementById("produto").style.display  = "inline";
+					graficoBase = defineMinhaConfig("Sal", x);
+					chart = new Chart(ctx, graficoBase );
+					var descricao = "Bem neutro: o aumento da renda dos consumidores não leva à variação da demanda desse bem. Por exemplo, não há uma"+
+					" relação entre a variação da renda do consumidor com a quantidade demandada (qi) do sal.";
+					var produto = "Bem neutro: Sal";
+	
+					document.getElementById("produto").innerHTML = produto;	
+					document.getElementById("descricao").innerHTML = descricao;	
+					document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+					document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+				}
+				
+				break;
+				
+				case "PREFERÊNCIA, GOSTO E HÁBITO":
+				document.getElementById("radioButtons").style.display = "none";
+				document.getElementById("botaoSetas").style.display  = "block";
+				document.getElementById("produto").style.display  = "inline";
+
+				graficoBase = defineMinhaConfig("Peixe", x);
+				chart = new Chart(ctx, graficoBase );
+				produto = "Campanha de incentivo ou boicote ao consumo do peixe";
+				textoBotaoSobe = "Campanha para incentivar o consumo";
+				textoBotaoDesce = "Campanha para boicotar o consumo";
+				
+				descricao = "Os hábitos, preferências ou gostos (G) podem ser alterados, manipulados por propaganda e campanhas" +
+				" promocionais. Podemos ter campanhas para aumentar o consumo ou para diminuir o consumo de bens.";
+				desc_cima = "Dado que o preço do peixe se mantém, a quantidade demandada dela aumenta quando lançam uma campanha,"+
+				" por exemplo, de estímulo ao consumo do ômega 3. Podemos ver isso graficamente com a reta dele andando para a direita.";
+				desc_baixo = "Dado que o preço do peixe se mantém, a quantidade demandada dela diminui quando lançam uma campanha,"
+				+" por exemplo, para evitar o consumo de peixe de uma determinada região pois uma empresa descartou metais pesados em"+
+				"um determinado rio. Podemos ver isso graficamente com a reta dele andando para a esquerda.";
+				
+				document.getElementById("baixo").onclick = function() { preferencia_pra_baixo(graficoBase,chart, desc_baixo);}
+				document.getElementById("cima").onclick = function() { preferencia_pra_cima(graficoBase,chart, desc_cima);}
+				
+
+				break;				
+			}
+			
+			document.getElementById("produto").innerHTML = produto;	
+			document.getElementById("descricao").innerHTML = descricao;	
+			document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+			document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+		}
+
+		function radioSelecionado(){
+			var x = document.forms['radioButtons']['renda'].value;	
+			switch(x){
+				
+			}
+		}
+
+		function defineMinhaConfig(mylabel, x ){  
+
+			var config = {
+				type: 'line',
+
+			// The data for our dataset
+			data: {
+
+				labels: [0,10, 20, 30, 40,50],
+				datasets: [{
+					label: mylabel,
+					borderColor: 'rgb(255, 69, 132)',
+					data: [null,50,40,30,20,null],
+				}
+				
+				]
+			},
+			
+			options: {
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Q(i)',
+							data: [20,30,50]
+						}
+					}],
+					yAxes: [{
+						display: true,
+						ticks: {
+							beginAtZero: true,
+							steps: 10,
+							stepValue: 5,
+							max: 70
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'P(i)'
+						}
+					}]
+				},
+				title: {
+					display: true,
+					text: x
+				}
+			}
+		};
+		return config;	
+	}
+
+
+
+
+	function  bens_substitutos_pra_cima(config,chart,texto){
+		var label_subida = "Dolly após o aumento do preço da itubaina"
+		if(config.data.datasets.length < 2){
+			var novo = {
+				label: label_subida,
+				borderColor: 'rgb(35, 69, 132)',
+				data: [null,0,0,0,0,null] }
+				
+
+				for (var i=1; i<novo.data.length - 1; i++){
+					novo.data[i] = config.data.datasets[0].data[i] + 15;
+				}
+				config.data.datasets.push(novo);
+
+
+			}
+			else if(config.data.datasets[1].label != label_subida)
+			{
+				config.data.datasets[1].label = label_subida;
+				for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+					config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+				}
+
+
+			}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+		
+
+		function bens_substitutos_pra_baixo(config,chart, texto){
+			var label_descida = "Dolly após a queda do preço da itubaina"; 
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_descida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+					for (var i=1; i<novo.data.length - 1; i++){
+						novo.data[i] = config.data.datasets[0].data[i] - 15;
+						if(novo.data[i]<0){
+							novo.data[i]= 0;
+						}
+					}
+					config.data.datasets.push(novo);
+
+
+				}
+
+				else if(config.data.datasets[1].label != label_descida)
+				{
+					config.data.datasets[1].label = label_descida;
+					for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+						config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+					}
+
+
+				}
+				chart.update();
+
+				document.getElementById("descricao").innerHTML = texto;
+			}
+
+
+
+
+			function  bens_complementares_pra_cima(config,chart,texto){
+				var label_subida = "HD's após o aumento do preço do computador"
+				if(config.data.datasets.length < 2){
+					var novo = {
+						label: label_subida,
+						borderColor: 'rgb(35, 69, 132)',
+						data: [null,0,0,0,0,null] }
+
+
+						for (var i=1; i<novo.data.length - 1; i++){
+							novo.data[i] = config.data.datasets[0].data[i] - 15;
+						}
+						config.data.datasets.push(novo);
+
+
+					}
+					else if(config.data.datasets[1].label != label_subida)
+					{
+						config.data.datasets[1].label = label_subida;
+						for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+							config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+						}
+
+
+					}
+					chart.update();
+					document.getElementById("descricao").innerHTML = texto;
+
+				}
+
+
+				function  bens_complementares_pra_baixo(config,chart,texto){
+					var label_subida = "HD's após o queda do preço do computador"
+					if(config.data.datasets.length < 2){
+						var novo = {
+							label: label_subida,
+							borderColor: 'rgb(35, 69, 132)',
+							data: [null,0,0,0,0,null] }
+
+
+							for (var i=1; i<novo.data.length - 1; i++){
+								novo.data[i] = config.data.datasets[0].data[i] + 15;
+							}
+							config.data.datasets.push(novo);
+
+
+						}
+						else if(config.data.datasets[1].label != label_subida)
+						{
+							config.data.datasets[1].label = label_subida;
+							for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+								config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+							}
+
+
+						}
+						chart.update();
+						document.getElementById("descricao").innerHTML = texto;
+
+					}
+
+				function  preferencia_pra_cima(config,chart,texto){
+					var label_subida = "Demanda do peixe após campanhas de incentivo"
+
+					if(config.data.datasets.length < 2){
+						var novo = {
+							label: label_subida,
+							borderColor: 'rgb(35, 69, 132)',
+							data: [null,0,0,0,0,null] }
+
+
+							for (var i=1; i<novo.data.length - 1; i++){
+								novo.data[i] = config.data.datasets[0].data[i] + 15;
+							}
+							config.data.datasets.push(novo);
+
+
+						}
+						else if(config.data.datasets[1].label != label_subida)
+						{
+							config.data.datasets[1].label = label_subida;
+							for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+								config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+							}
+
+
+						}
+						chart.update();
+						document.getElementById("descricao").innerHTML = texto;
+
+					}
+
+
+					function  preferencia_pra_baixo(config,chart,texto){
+						var label_subida = "Demanda do peixe após campanhas de boicote"
+
+						if(config.data.datasets.length < 2){
+							var novo = {
+								label: label_subida,
+								borderColor: 'rgb(35, 69, 132)',
+								data: [null,0,0,0,0,null] }
+
+
+								for (var i=1; i<novo.data.length - 1; i++){
+									novo.data[i] = config.data.datasets[0].data[i] - 15;
+								}
+								config.data.datasets.push(novo);
+
+
+							}
+							else if(config.data.datasets[1].label != label_subida)
+							{
+								config.data.datasets[1].label = label_subida;
+								for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+									config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+								}
+
+
+							}
+							chart.update();
+							document.getElementById("descricao").innerHTML = texto;
+
+						}
+					function  bem_normal_pra_cima(config,chart,texto){
+						var label_subida = "Manteiga após o aumento da renda do consumidor"
+						if(config.data.datasets.length < 2){
+							var novo = {
+								label: label_subida,
+								borderColor: 'rgb(35, 69, 132)',
+								data: [null,0,0,0,0,null] }
+								
+
+								for (var i=1; i<novo.data.length - 1; i++){
+									novo.data[i] = config.data.datasets[0].data[i] + 15;
+								}
+								config.data.datasets.push(novo);
+
+
+							}
+							else if(config.data.datasets[1].label != label_subida)
+							{
+								config.data.datasets[1].label = label_subida;
+								for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+									config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+								}
+
+
+							}
+							chart.update();
+							document.getElementById("descricao").innerHTML = texto;
+
+						}
+
+					function bem_normal_pra_baixo(config,chart, texto){
+						var label_descida = "Manteiga após a diminuição da renda do consumidor"; 
+						if(config.data.datasets.length < 2){
+							var novo = {
+								label: label_descida,
+								borderColor: 'rgb(35, 69, 132)',
+								data: [null,0,0,0,0,null] }
+
+
+								for (var i=1; i<novo.data.length - 1; i++){
+									novo.data[i] = config.data.datasets[0].data[i] - 15;
+									if(novo.data[i]<0){
+										novo.data[i]= 0;
+									}
+								}
+								config.data.datasets.push(novo);
+
+
+							}
+
+							else if(config.data.datasets[1].label != label_descida)
+							{
+								config.data.datasets[1].label = label_descida;
+								for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+									config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+								}
+
+
+							}
+							chart.update();
+
+							document.getElementById("descricao").innerHTML = texto;
+						}
+						
+					function  bem_inferior_pra_cima(config,chart,texto){
+						var label_subida = "Margarina após o aumento da renda dos consumidores"
+						if(config.data.datasets.length < 2){
+							var novo = {
+								label: label_subida,
+								borderColor: 'rgb(35, 69, 132)',
+								data: [null,0,0,0,0,null] }
+
+
+								for (var i=1; i<novo.data.length - 1; i++){
+									novo.data[i] = config.data.datasets[0].data[i] - 15;
+								}
+								config.data.datasets.push(novo);
+
+
+							}
+							else if(config.data.datasets[1].label != label_subida)
+							{
+								config.data.datasets[1].label = label_subida;
+								for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+									config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+								}
+
+
+							}
+							chart.update();
+							document.getElementById("descricao").innerHTML = texto;
+
+						}
+
+
+						function  bem_inferior_pra_baixo(config,chart,texto){
+							var label_subida = "Margarina após a diminuição da renda dos consumidores"
+							if(config.data.datasets.length < 2){
+								var novo = {
+									label: label_subida,
+									borderColor: 'rgb(35, 69, 132)',
+									data: [null,0,0,0,0,null] }
+
+
+									for (var i=1; i<novo.data.length - 1; i++){
+										novo.data[i] = config.data.datasets[0].data[i] + 15;
+									}
+									config.data.datasets.push(novo);
+
+
+								}
+								else if(config.data.datasets[1].label != label_subida)
+								{
+									config.data.datasets[1].label = label_subida;
+									for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+										config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+									}
+
+
+								}
+								chart.update();
+								document.getElementById("descricao").innerHTML = texto;
+
+							}
+						</script>
+
+
+
+
+						<!--Rodapé -->
+						<footer id="rodape">
+
+						</footer>
+
+						<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+						<script src="jquery.min.js"></script>
+
+						<!-- Include all compiled plugins (below), or include individual files as needed -->
+						<script src="bootstrap/js/bootstrap.min.js"></script>
+					</body>
+					</html>

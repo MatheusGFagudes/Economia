@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+	<script src="Chart.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+  header{
+		font-family: arial black;
+	}
+	header a {
+	
+		color:#fff;
+	}
+
+	#caixaDescricao{
+		border: 2px solid blue;
+		text-align: justify;
+		margin-right: 10%;
+		margin-left: 10%;
+		margin-top: 2%;
+	}
+	#descricao{
+		margin-right: 5%;
+		margin-left: 5%;
+	}
+	#radioButtons{
+		margin-top: 5%;
+		margin-left: 5%;
+	}
+    </style>
+
+    <title>Oferta</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="estilo.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header>
+     <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
+      <div class="container">
+
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Microeconomia <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="apresentacao_demanda.html">Demanda</a></li>
+              <li><a href="apresentacao_oferta.html">Oferta</a></li>
+              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
+			  <li><a href="elasticidade.html">Elasticidade</a></li>
+         
+            </ul>
+          </li>  
+          
+        </ul>
+          
+          
+      </div>
+       
+    </nav>
+    
+</header>
+    
+
+    <!--CONTEÚDO -->
+    <section id="conteudo">  
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+          <div class="col-sm-8">
+              <h2>Gráfico de Demanda</h2>
+            <canvas id="myChart"></canvas>
+             <br>
+			 <a href="oferta.html" class="btn btn-primary">ANALISAR VARIÁVEIS QUE AFETAM A OFERTA</a>
+			 <h3>Oferta</h3>
+           <p>Definição: <br>
+            Oferta é a quantidade de determinado bem ou serviço que os produtores e
+            vendedores desejam vender em determinado período. Quanto maior o preço (pi) de um produto, maior vai ser a quantidade ofertada (qi) pelas empresas desse bem, uma vez que elas vão estar estimuladas a produzirem mais.
+            Vamos analisar como cada variável influencia o preço do bem (pi) e a quantidade ofertada (qi) do bem.<br>
+            Variáveis:<br>
+            pf = preço dos insumos de produção<br>
+            ps = preço de bens substitutos na produção<br>
+            T = tecnologia<br>
+            A = fatores climáticos e/ou ambientais
+
+
+
+          </p>
+           <br>
+           
+          </div>
+        <div class="col-sm-2">
+        </div>
+      </div>
+     
+    </section>
+
+<script>
+							var ctx = document.getElementById('myChart').getContext('2d');
+							var graficoBase = defineMinhaConfig("Dolly", "Oferta");
+							var chart = new Chart(ctx, graficoBase );
+					
+							
+
+		
+
+		function defineMinhaConfig(mylabel, x ){  
+
+			var config = {
+				type: 'line',
+
+			// The data for our dataset
+			data: {
+
+				labels: [0,10, 20, 30, 40,50],
+				datasets: [{
+					label: "Oferta",
+					borderColor: 'rgb(255, 69, 132)',
+					data: [null,20,30,40,50,null],
+				}
+				
+				
+				
+				]
+			},
+			
+			options: {
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Q(i)',
+							data: [20,30,50]
+						}
+					}],
+					yAxes: [{
+						display: true,
+						ticks: {
+							beginAtZero: true,
+							steps: 10,
+							stepValue: 5,
+							max: 70
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'P(i)'
+						}
+					}]
+				},
+				title: {
+					display: true,
+					text: x
+				}
+			}
+		};
+		return config;	
+	}
+
+
+
+
+	
+						</script>
+    <!--Rodapé -->
+    <footer id="rodape">
+     
+    </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

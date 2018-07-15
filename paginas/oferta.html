@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<style>
+	
+	header{
+		font-family: arial black;
+	}
+	header a {
+		color:#fff;
+	}
+
+	#caixaDescricao{
+		border: 2px solid blue;
+		text-align: justify;
+		margin-right: 10%;
+		margin-left: 10%;
+		margin-top: 2%;
+	}
+	#descricao{
+		margin-right: 5%;
+		margin-left: 5%;
+	}
+	#radioButtons{
+		margin-left: 5%;
+	}
+
+</style>
+
+<script src="Chart.min.js"></script>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Oferta</title>
+<!-- Bootstrap -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="estilo.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body onload="troca()">
+	<header>
+	 <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
+      <div class="container">
+
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Microeconomia <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="apresentacao_demanda.html">Demanda</a></li>
+              <li><a href="apresentacao_oferta.html">Oferta</a></li>
+              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
+			  <li><a href="elasticidade.html">Elasticidade</a></li>
+         
+            </ul>
+          </li>  
+          
+        </ul>
+          
+          
+      </div>
+       
+    </nav>
+
+	</header>
+	<!--CONTEÚDO -->
+	<section id="conteudo" style="margin:5%">  
+		<div class="container">
+			<div class="col-sm-8">
+				<h3>Oferta </h3>
+				<h4 id="titulo" >INSUMOS DE PRODUÇÃO </h4>
+				<canvas id="myChart"></canvas>
+			</div>
+			<div class="col-sm-4" style="margin-top: 10px">
+
+
+
+
+				<select id="opcoes" onchange="troca()">
+					<option value="INSUMOS DE PRODUÇÃO">INSUMOS DE PRODUÇÃO</option>
+					<option value="BENS SUBSTITUTOS NA PRODUÇÃO">BENS SUBSTITUTOS NA PRODUÇÃO</option>
+					<option value="TECNOLOGIA">TECNOLOGIA</option>
+					<option value="FATORES CLIMÁTICOS">FATORES CLIMÁTICOS</option>
+				</select>
+				<br>
+
+				<br>
+				<p id="produto">  </p>
+
+
+				<div id="botaoSetas">
+					<button type="button"  id="cima" class="btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoSobe" style="display: inline"></p>
+					<br>
+
+					<button type="button" id="baixo"class="btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoDesce" style="display: inline"></p>
+				</div>
+				<br>
+				<br>
+				<button type="button" id="reseta"  onclick="troca()" class="btn btn-default" aria-label="seta pra baixo">
+					Resetar
+				</button>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="caixaDescricao">
+						<p id="descricao"> </p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<script>
+
+		function troca(){
+			var x = document.getElementById("opcoes").value;
+			document.getElementById("titulo").innerHTML = x;
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var graficoBase;
+			var produto;
+			var descricao;
+			var chart;
+			var desc_cima;
+			var desc_baixo
+			document.getElementById("baixo").style.display  = "inline";
+			document.getElementById("textoBotaoDesce").style.display  = "inline";
+			switch(x) {
+				case "INSUMOS DE PRODUÇÃO":
+				document.getElementById("botaoSetas").style.display  = "block";
+				document.getElementById("produto").style.display  = "inline";
+				graficoBase = defineMinhaConfig("Açúcar", x);
+				
+				chart = new Chart(ctx, graficoBase );
+				produto = "Insumo de produção: Terra";
+				descricao = "Insumos de produção: a variação de um insumo de produção leva à variação da quantidade ofertada (qi) de um bem."+
+				"Por exemplo, há uma relação entre a variação do preço do fator terra com a quantidade ofertada do açúcar. Selecione uma das setas para ver o que acontece.";  
+				textoBotaoSobe = "Aumenta o preço da Terra";
+				textoBotaoDesce = "Diminui o preço da Terra";
+
+				desc_cima = "Dado que o preço do açúcar se mantém, a quantidade ofertada dele diminui quando aumenta o preço da terra. Podemos"+
+				" ver isso graficamente com a reta dele andando para a esquerda.";
+				desc_baixo = "Dado que o preço do açúcar se mantém, a quantidade ofertada dele aumenta quando diminui o preço da terra. Podemos"+
+				" ver isso graficamente com a reta dele andando para a direita.";
+				
+				document.getElementById("baixo").onclick = function() {insumos_pra_cima(graficoBase,chart, desc_baixo); }
+				document.getElementById("cima").onclick = function() { insumos_pra_baixo(graficoBase,chart, desc_cima);}
+
+
+				break;
+				case "BENS SUBSTITUTOS NA PRODUÇÃO":
+				document.getElementById("botaoSetas").style.display  = "block";
+				document.getElementById("produto").style.display  = "inline";
+				graficoBase = defineMinhaConfig("Milho", x);
+				chart = new Chart(ctx, graficoBase );
+				produto = "Produto complementar: Computador";
+				descricao =  "Bens substitutos: o consumo de um bem substitui o consumo do outro. Ou seja, há uma relação entre a variação do preço"+
+				" do café com o preço (pi) e quantidade ofertada (qi) do milho pois os produtores irão priorizar aquele bem que tem maior valor de mercado."+
+				" Café e milho são bens substitutos na produção (dividem a mesma terra de"+
+				" plantação ou mesma mão de obra por exemplo). Selecione uma das setas para ver o que acontece.";
+				textoBotaoSobe = "Aumenta o preço do café";
+				textoBotaoDesce = "Diminui o preço do café";				
+				
+				desc_cima = "Dado que o preço do milho se mantém, a quantidade ofertada dele diminui quando aumenta o preço da café, pois os produtores irão"+
+				" investir mais naquele produto com maior valor no mercado. Podemos ver isso graficamente com a reta dele andando para a esquerda.";
+				desc_baixo = "Dado que o preço dos HDs se mantém, a quantidade demandada dele aumenta se o preço dos computadores diminui. Podemos ver isso graficamente"+
+				" com a reta dele andando para a direita.";
+				
+				document.getElementById("baixo").onclick = function() { bens_substitutos_pra_baixo(graficoBase,chart, desc_baixo);}
+				document.getElementById("cima").onclick = function() { bens_substitutos_pra_cima(graficoBase,chart, desc_cima);}
+				
+				break;
+				
+				case "TECNOLOGIA":
+				document.getElementById("baixo").style.display  = "none";
+				document.getElementById("textoBotaoDesce").style.display  = "none";
+				document.getElementById("produto").style.display  = "none";
+				graficoBase = defineMinhaConfig("Açúcar", x);
+				chart = new Chart(ctx, graficoBase );
+				descricao = "Supondo que um avanço na tecnologia permitiu mais açúcar ser produzido com o mesmo número de insumos (máquinas desperdiçam menos, por exemplo)."+
+				" Desta forma, a reta move-se para direita, pois, a um mesmo preço, mais do produto pode ser ofertado";
+				document.getElementById("cima").onclick = function() { tecno_pra_cima(graficoBase,chart, descricao);}
+				textoBotaoSobe = "Avanço Tecnológico";
+
+				break;
+				case "FATORES CLIMÁTICOS":
+				document.getElementById("botaoSetas").style.display  = "block";
+				document.getElementById("produto").style.display  = "inline";
+
+				graficoBase = defineMinhaConfig("Uva", x);
+				chart = new Chart(ctx, graficoBase );
+				produto = "Mudanças Climáticas";
+				
+				descricao = "Uma mudança climática influencia na quantidade ofertada (qi) de um produto, pois ela pode favorecer a produção ou arruiná-la. Selecione uma das setas"+
+				"para ver o que acontece.";
+				textoBotaoSobe = "Mudanças climáticas favoráveis";
+				textoBotaoDesce = "Mudanças climáticas desfavoráveis";	
+				
+				desc_cima = "A quantidade ofertada da uva aumenta quando acontece uma mudança climática que favorece a sua produção, como por exemplo chuvas frequentes. Podemos ver"+
+				" isso graficamente com a reta dele andando para a direita.";
+				desc_baixo = "A quantidade ofertada da uva diminui quando acontece uma mudança climática que arruina a sua produção, como por exemplo tempestades fortes. Podemos ver"+
+				" isso graficamente com a reta dele andando para a esquerda.";
+				
+				document.getElementById("baixo").onclick = function() { clima_pra_baixo(graficoBase,chart, desc_baixo);}
+				document.getElementById("cima").onclick = function() { clima_pra_cima(graficoBase,chart, desc_cima);}
+
+				break;				
+			}
+			
+			document.getElementById("produto").innerHTML = produto;	
+			document.getElementById("descricao").innerHTML = descricao;	
+			document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+			document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+		}
+
+
+
+
+		function defineMinhaConfig(mylabel, x ){  
+
+			var config = {
+				type: 'line',
+
+			// The data for our dataset
+			data: {
+
+				labels: [0,10, 20, 30, 40,50],
+				datasets: [{
+					label: mylabel,
+					borderColor: 'rgb(255, 69, 132)',
+					data: [null,20,30,40,50,null],
+				}
+				
+				]
+			},
+			
+			options: {
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Q(i)',
+							data: [20,30,50]
+						}
+					}],
+					yAxes: [{
+						display: true,
+						ticks: {
+							beginAtZero: true,
+							steps: 10,
+							stepValue: 5,
+							max: 70
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'P(i)'
+						}
+					}]
+				},
+				title: {
+					display: true,
+					text: x
+				}
+			}
+		};
+		return config;	
+	}
+
+
+
+
+	function  bens_substitutos_pra_cima(config,chart,texto){
+		var label_subida = "Milho após o aumento do preço café"
+		
+		if(config.data.datasets.length < 2){
+			var novo = {
+				label: label_subida,
+				borderColor: 'rgb(35, 69, 132)',
+				data: [null,0,0,0,0,null] }
+				
+
+				for (var i=1; i<novo.data.length - 1; i++){
+					novo.data[i] = config.data.datasets[0].data[i] + 15;
+				}
+				config.data.datasets.push(novo);
+
+
+			}
+			else if(config.data.datasets[1].label != label_subida)
+			{
+				config.data.datasets[1].label = label_subida;
+				for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+					config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+				}
+
+
+			}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+		
+		
+		
+
+		function bens_substitutos_pra_baixo(config,chart, texto){
+			var label_descida = "Milho após a redução do preço do café"; 
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_descida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+					for (var i=1; i<novo.data.length - 1; i++){
+						novo.data[i] = config.data.datasets[0].data[i] - 15;
+						if(novo.data[i]<0){
+							novo.data[i]= 0;
+						}
+					}
+					config.data.datasets.push(novo);
+
+
+				}
+
+				else if(config.data.datasets[1].label != label_descida)
+				{
+					config.data.datasets[1].label = label_descida;
+					for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+						config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+					}
+
+
+				}
+				chart.update();
+
+				document.getElementById("descricao").innerHTML = texto;
+			}
+
+		function tecno_pra_cima(config,chart, texto){
+			var label_descida = "Açucar após avanços tecnológicos"; 
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_descida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+					for (var i=1; i<novo.data.length - 1; i++){
+						novo.data[i] = config.data.datasets[0].data[i] - 15;
+						if(novo.data[i]<0){
+							novo.data[i]= 0;
+						}
+					}
+					config.data.datasets.push(novo);
+
+
+				}
+
+				else if(config.data.datasets[1].label != label_descida)
+				{
+					config.data.datasets[1].label = label_descida;
+					for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+						config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+					}
+
+
+				}
+				chart.update();
+
+				document.getElementById("descricao").innerHTML = texto;
+			}
+
+
+		function  insumos_pra_cima(config,chart,texto){
+			var label_subida = "Açúcar após a redução do preço da terra"
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_subida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+				for (var i=1; i<novo.data.length - 1; i++){
+					novo.data[i] = config.data.datasets[0].data[i] - 15;
+				}
+				config.data.datasets.push(novo);
+
+
+			}
+			else if(config.data.datasets[1].label != label_subida)
+			{
+				config.data.datasets[1].label = label_subida;
+				for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+					config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+				}
+
+
+			}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+
+		function  insumos_pra_baixo(config,chart,texto){
+			var label_subida = "Açúcar após o aumento do preço da terra"
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_subida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+				for (var i=1; i<novo.data.length - 1; i++){
+					novo.data[i] = config.data.datasets[0].data[i] + 15;
+				}
+				config.data.datasets.push(novo);
+
+
+			}
+			else if(config.data.datasets[1].label != label_subida)
+			{
+				config.data.datasets[1].label = label_subida;
+				for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+					config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+				}
+
+
+			}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+		function  clima_pra_baixo(config,chart,texto){
+			var label_subida = "Uva após mudanças climáticas desfavoráveis"
+
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_subida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+					for (var i=1; i<novo.data.length - 1; i++){
+						novo.data[i] = config.data.datasets[0].data[i] + 15;
+					}
+					config.data.datasets.push(novo);
+
+
+			}
+			else if(config.data.datasets[1].label != label_subida)
+			{
+				config.data.datasets[1].label = label_subida;
+				for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+					config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 15;
+				}
+
+
+			}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+
+		function  clima_pra_cima(config,chart,texto){
+			var label_subida = "Uva após mudanças climáticas favoráveis"
+
+			if(config.data.datasets.length < 2){
+				var novo = {
+					label: label_subida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [null,0,0,0,0,null] }
+
+
+					for (var i=1; i<novo.data.length - 1; i++){
+						novo.data[i] = config.data.datasets[0].data[i] - 15;
+					}
+					config.data.datasets.push(novo);
+
+
+				}
+				else if(config.data.datasets[1].label != label_subida)
+				{
+					config.data.datasets[1].label = label_subida;
+					for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+						config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 15;
+					}
+
+
+				}
+				chart.update();
+				document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+
+	</script>
+
+
+
+
+	<!--Rodapé -->
+	<footer id="rodape">
+
+	</footer>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="jquery.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
