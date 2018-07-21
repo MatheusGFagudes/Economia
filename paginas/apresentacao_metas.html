@@ -17,7 +17,7 @@
     }
   </style>
 
-  <title>Demanda</title>
+  <title>Macroeconomia</title>
   <!-- Bootstrap -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="estilo.css" rel="stylesheet">
@@ -94,103 +94,41 @@
     <br>
     <div class="container">
       <fieldset>
-        <legend> Demanda</legend>
+        <legend> Metas da política macroeconômica:</legend>
 
       </fieldset>
 
 
       <div class="col-sm-5">
 
-
-
-
-
-        <h4>Definição:</h4>
+        <h4>Metas:</h4>
         <p>
-          <br> Demanda (ou procura) é a quantidade de determinado bem ou serviço que os consumidores desejam adquirir, num dado
-          período, dada sua renda, seus gastos e o preço de mercado. Quanto maior o preço (pi) de um produto, menor vai ser
-          a sua quantidade (qi) demandada pelos consumidores.Vamos analisar como cada variável influencia o preço do bem
-          (pi) e a quantidade demandada (qi) pelo consumidor.
-          <br> Variáveis:
-          <br> ps = preço dos bens substitutos
-          <br> pc = preço dos bens complementares
-          <br> r = renda do consumidos
-          <br> g = preferências, gostos e hábitos do consumidor
+          <br>
+          <b>(a)</b> Alto nível de emprego
+          <br>
+          <b>(b)</b> Estabilididade de preços (combate à inflação)
+          <br>
+          <b>(c)</b> Distribuição de renda socialmente justa
+          <br>
+          <b>(d)</b> Crescimento econômico
         </p>
         <br>
+        <p>
+          Na próxima página, clicando no botão abaixo, poderemos ver
+          <u>como os instrumentos da política macroeconômica influenciam a economia para alcançar essas metas.
+            <u>
+        </p>
 
-        <a href="demanda.html" class="btn btn-primary">ANALISAR VARIÁVEIS QUE AFETAM A DEMANDA</a>
+        <a href="instrumentos_macro.html" class="btn btn-primary">ANALISAR INSTRUMENTOS DA POLÍTICA MACROECONÔMICA</a>
       </div>
       <div class="col-sm-7">
-        <h4>Gráfico:</h4>
-        <canvas id="myChart"></canvas>
+
       </div>
     </div>
 
   </section>
 
   <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var graficoBase = defineMinhaConfig("Dolly", "Demanda");
-    var chart = new Chart(ctx, graficoBase);
-
-
-
-
-
-    function defineMinhaConfig(mylabel, x) {
-
-      var config = {
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-
-          labels: [0, 10, 20, 30, 40, 50],
-          datasets: [{
-            label: "demanda",
-            borderColor: 'rgb(255, 69, 132)',
-            data: [null, 50, 40, 30, 20, null],
-          }
-
-
-
-          ]
-        },
-
-        options: {
-          scales: {
-            xAxes: [{
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Q(i)',
-                data: [20, 30, 50]
-              }
-            }],
-            yAxes: [{
-              display: true,
-              ticks: {
-                beginAtZero: true,
-                steps: 10,
-                stepValue: 5,
-                max: 70
-              },
-              scaleLabel: {
-                display: true,
-                labelString: 'P(i)'
-              }
-            }]
-          },
-          title: {
-            display: true,
-            text: x
-          }
-        }
-      };
-      return config;
-    }
-
 
 
 

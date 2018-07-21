@@ -1,99 +1,353 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-      body{
-        color: blue;
-      }
-      p{
-        text-align: justify;
-      }
-    </style>
 
-    <title>Elasticidade-preço da oferta</title>
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="estilo.css" rel="stylesheet">
+<head>
+	<style type="text/css">
+		header {
+			font-family: arial black;
+		}
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+		header a {
+
+			color: #fff;
+		}
+
+		body {
+			color: blue;
+		}
+
+		p {
+			text-align: justify;
+		}
+
+		#caixaDescricao {
+			border: 2px solid blue;
+			text-align: justify;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 2%;
+		}
+	</style>
+
+	<script src="Chart.min.js"></script>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Elasticidade-preço da oferta</title>
+	<!-- Bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="estilo.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <header>
-   <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
-      <div class="container">
+</head>
+
+<body onload="troca()">
+	<header>
+		<nav class="navbar  navbar-inverse navbar-transparente">
+			<div class="container">
 
 
-        <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
-          <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              Microeconomia <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="apresentacao_demanda.html">Demanda</a></li>
-              <li><a href="apresentacao_oferta.html">Oferta</a></li>
-              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
-              <li><a href="elasticidade.html">Elasticidade</a></li>
-         
-            </ul>
-          </li>  
-          
-        </ul>
-          
-          
-      </div>
-       
-    </nav>
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="../index.html">Home</a>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							Microeconomia
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="apresentacao_demanda.html">Demanda</a>
+							</li>
+							<li>
+								<a href="apresentacao_oferta.html">Oferta</a>
+							</li>
+							<li>
+								<a href="equilibrio_mercado.html">Equilíbrio de Mercado</a>
+							</li>
+							<li>
+								<a href="elasticidade.html">Elasticidade</a>
+							</li>
 
-    
-</header>
-    
+						</ul>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							Macroeconomia
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="calculo_pib.html">PIB x PNB</a>
+							</li>
+							<li>
+								<a href="apresentacao_metas.html">Metas e Instrumentos</a>
+							</li>
 
-    <!--CONTEÚDO -->
-    <section id="conteudo">  
-      <div class="row">
-        <div class="col-sm-2">
-        </div>
-          <div class="col-sm-8">
-              <h2>Elasticidade-preço da Oferta</h2>
-             <br>
-           <p>Definição: <br>
-            Mede a variação da quantidade ofertada de bens dada uma modificação no preço deste bem:
-          </p>
-		  <img id="form-oferta" src="imagens/elast-oferta.jpg">
-			<br>
+						</ul>
+					</li>
+
+
+				</ul>
+
+
+			</div>
+
+		</nav>
+
+	</header>
+
+
+	<!--CONTEÚDO -->
+	<section id="conteudo">
+		<div class="row">
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-8" style="margin-top: 4%">
+				<legend>Elasticidade-preço da Oferta </legend>
+				<p>Definição:
+					<br> Mede a variação da quantidade ofertada de bens dada uma modificação no preço deste bem:
+				</p>
+				<form id="chk-grafico" style="margin-bottom: 1%">
+					<input id="exibir" type="checkbox" name="exibe" onclick="troca()">
+					<span class="checkboxtext">
+						Exibe gráfico
+					</span>
+				</form>
+
+				<canvas id="myChart" style="display: none"></canvas>
+
+				<img id="form_oferta" src="imagens/elast-oferta.jpg">
+
+				<div id="botaoSetas" style="display: none">
+					<button type="button" id="cima" class="btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoSobe" style="display: inline"></p>
+					<br>
+					<button type="button" id="meio" class="btn btn-default" aria-label="mantem" onclick="troca()">
+						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoMeio" style="display: inline"></p>
+					<br>
+					<button type="button" id="baixo" class="btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoDesce" style="display: inline"></p>
+				</div>
+
+				<!--<button type="button" id="reseta"  onclick="troca()" class="btn btn-default" aria-label="seta pra baixo" style="display: none">
+					Resetar
+			</button>
 			Se: <br>	
 			Eps > 1: bem de oferta elástica;<br>
 			Eps < 1: bem de oferta inelástica;<br>
-			Eps = 1: elasticidade-preço da oferta unitária;
+			Eps = 1: elasticidade-preço da oferta unitária;<br>
 			<br>
-			<br>
-			<img id="graf-oferta" src="imagens/elast-oferta.jpg">
-          </div>
-        <div class="col-sm-2">
-        </div>
-      </div>
-     
-    </section>
+			<img id="graf-oferta" src="imagens/elast-oferta.jpg">-->
+				<p id="descricao" style="margin-top: 1%"> </p>
+			</div>
+			<div class="col-sm-2">
+			</div>
+		</div>
+
+	</section>
+
+	<script>
+
+		function troca() {
+			var ctx = document.getElementById("myChart").getContext("2d");
+			var graficoBase;
+			var descricao = "";
+			var chart;
+			var desc_cima;
+			var desc_baixo;
+			var textoBotaoSobe;
+			var textoBotaoDesce;
+			var textoBotaoMeio;
+			var check = document.getElementById("exibir");
+
+			if (check.checked == true) {
+				document.getElementById("botaoSetas").style.display = "block";
+				document.getElementById("form_oferta").style.display = "none";
+				document.getElementById("myChart").style.display = "block";
+				graficoBase = defineMinhaConfig("Oferta");
+				chart = new Chart(ctx, graficoBase);
+				var descricao = "Eps = 1: elasticidade-preço da oferta unitária";
+				textoBotaoSobe = "Aumenta elasticidade";
+				textoBotaoDesce = "Diminui elasticidade";
+				textoBotaoMeio = "Resetar";
+
+				var desc_cima = "Eps > 1: bem de oferta elástica";
+				var desc_baixo = "Eps < 1: bem de oferta inelástica";
+
+				document.getElementById("baixo").onclick = function () { diminui_elast(graficoBase, chart, desc_baixo); }
+				document.getElementById("cima").onclick = function () { aumenta_elast(graficoBase, chart, desc_cima); }
+
+				document.getElementById("descricao").innerHTML = descricao;
+				document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+
+			}
+			else {
+
+				document.getElementById("botaoSetas").style.display = "none";
+				document.getElementById("form_oferta").style.display = "block";
+				document.getElementById("myChart").style.display = "none";
+
+			}
 
 
-    <!--Rodapé -->
-    <footer id="rodape">
-     
-    </footer>
+			document.getElementById("descricao").innerHTML = descricao;
+			document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+			document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+			document.getElementById("textoBotaoMeio").innerHTML = textoBotaoMeio;
+		}
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="jquery.min.js"></script>
+		function defineMinhaConfig(mylabel) {
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  </body>
+			var config = {
+				type: 'line',
+
+				// The data for our dataset
+				data: {
+
+					labels: [0, 10, 20, 30, 40, 50],
+					datasets: [{
+						label: mylabel,
+						borderColor: 'rgb(255, 69, 132)',
+						data: [0, 10, 20, 30, 40, null],
+					}
+
+					]
+				},
+
+				options: {
+					scales: {
+						xAxes: [{
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Q(i)',
+								data: [20, 30, 50]
+							}
+						}],
+						yAxes: [{
+							display: true,
+							ticks: {
+								beginAtZero: true,
+								steps: 10,
+								stepValue: 5,
+								max: 70
+							},
+							scaleLabel: {
+								display: true,
+								labelString: 'P(i)'
+							}
+						}]
+					},
+					title: {
+						display: true,
+						text: "Elasticidade-preço da oferta"
+					}
+				}
+			};
+			return config;
+		}
+
+		function aumenta_elast(config, chart, texto) {
+			var label_subida = "Oferta elástica"
+			if (config.data.datasets.length < 2) {
+				var novo = {
+					label: label_subida,
+					borderColor: 'rgb(35, 69, 132)',
+					data: [0, 0, 0, 0, 0, null]
+				}
+
+
+				for (var i = 0; i < novo.data.length - 1; i++) {
+					novo.data[i] = config.data.datasets[0].data[i] + 20;
+				}
+				config.data.datasets.push(novo);
+
+
+			}
+			else if (config.data.datasets[1].label != label_subida) {
+				config.data.datasets[1].borderColor = 'rgb(35, 69, 132)';
+				config.data.datasets[1].label = label_subida;
+				for (var i = 0; i < config.data.datasets[1].data.length - 1; i++) {
+					if (i < 2) {
+						config.data.datasets[1].data[i] = 0;
+					}
+					config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 20;
+
+				}
+
+
+			}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+		function diminui_elast(config, chart, texto) {
+			var label_descida = "Oferta inelástica";
+			if (config.data.datasets.length < 2) {
+				var novo = {
+					label: label_descida,
+					borderColor: 'rgb(0, 128, 0)',
+					data: [null, null, 0, 0, 0, null]
+				}
+
+
+				for (var i = 2; i < novo.data.length - 1; i++) {
+					novo.data[i] = config.data.datasets[0].data[i] - 20;
+					if (novo.data[i] < 0) {
+						novo.data[i] = 0;
+					}
+				}
+				config.data.datasets.push(novo);
+
+
+			}
+
+			else if (config.data.datasets[1].label != label_descida) {
+				config.data.datasets[1].label = label_descida;
+				config.data.datasets[1].borderColor = 'rgb(0, 128, 0)'
+				for (var i = 0; i < config.data.datasets[1].data.length - 1; i++) {
+					if (i < 2) {
+						config.data.datasets[1].data[i] = null;
+					} else {
+						config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 20;
+					}
+				}
+
+
+			}
+			chart.update();
+
+			document.getElementById("descricao").innerHTML = texto;
+		}
+	</script>
+
+
+	<!--Rodapé -->
+	<footer id="rodape">
+
+	</footer>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="jquery.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
 </html>

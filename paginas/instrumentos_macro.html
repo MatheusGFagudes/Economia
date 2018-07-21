@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<style>
+		header {
+			font-family: arial black;
+		}
+
+		header a {
+
+			color: #fff;
+		}
+
+		#caixaDescricao {
+			border: 2px solid blue;
+			text-align: justify;
+			margin-right: 10%;
+			margin-left: 10%;
+			margin-top: 2%;
+		}
+
+		#descricao {
+			margin-right: 5%;
+			margin-left: 5%;
+		}
+
+		#radioButtons {
+			margin-top: 5%;
+			margin-left: 5%;
+		}
+	</style>
+
+	<script src="Chart.min.js"></script>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Macroeconomia</title>
+	<!-- Bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="estilo.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body onload="troca()">
+	<header>
+		<nav class="navbar  navbar-inverse navbar-transparente">
+			<div class="container">
+
+
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="../index.html">Home</a>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							Microeconomia
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="apresentacao_demanda.html">Demanda</a>
+							</li>
+							<li>
+								<a href="apresentacao_oferta.html">Oferta</a>
+							</li>
+							<li>
+								<a href="equilibrio_mercado.html">Equilíbrio de Mercado</a>
+							</li>
+							<li>
+								<a href="elasticidade.html">Elasticidade</a>
+							</li>
+
+						</ul>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							Macroeconomia
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="calculo_pib.html">PIB x PNB</a>
+							</li>
+							<li>
+								<a href="apresentacao_metas.html">Metas e Instrumentos</a>
+							</li>
+
+						</ul>
+					</li>
+
+
+				</ul>
+
+
+			</div>
+
+		</nav>
+
+	</header>
+	<!--CONTEÚDO -->
+	<section id="conteudo">
+		<div class="container">
+			<legend>Instrumentos da política macroeconômica </legend>
+			<div class="col-sm-8">
+
+
+				<h4 id="titulo">Bens Substitutos </h4>
+				<p id="descricao"> saiojdosaijdoisajdoisasahusha
+					<br> jsaijsaijsiajsijaisja shauhsuahsuhshuahshauhsa
+					<br> shaushau
+					<br>sa
+					<br>asasas </p>
+
+			</div>
+			<p> Selecione abaixo o instrumento que deseja ver: </p>
+			<div class="col-sm-4" style="margin-top: 1%">
+
+
+
+
+				<select id="opcoes" onchange="troca()">
+					<option value="POLÍTICA FISCAL">POLÍTICA FISCAL</option>
+					<option value="POLÍTICA MONETÁRIA">POLÍTICA MONETÁRIA</option>
+					<option value="POLÍTICA CAMBIAL E COMERCIAL">POLÍTICA CAMBIAL E COMERCIAL</option>
+					<option value="POLÍTICA DE RENDAS">POLÍTICA DE RENDAS</option>
+				</select>
+				<br>
+
+
+
+
+
+				<br>
+				<p id="x"> </p>
+
+
+
+			</div>
+			<div class="row">
+				<div class="col-sm-12" style="margin-top: 3%">
+					<fieldset>
+						<legend> Como influencia as metas? </legend>
+						<p id="influencia"> </p>
+					</fieldset>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<script>
+
+		function troca() {
+			var x = document.getElementById("opcoes").value;
+			document.getElementById("titulo").innerHTML = x;
+
+			var descricao;
+			var influencia;
+			switch (x) {
+				case "POLÍTICA FISCAL":
+
+					descricao = "São os intrumentos que o governo tem ao seu dispor para arrecadar tributos" +
+						"(política tributária) e controlar dispesas (política de gastos).";
+					influencia = "Para <b>redução da inflação</b> (estabilidade de preços): medidas fiscais de diminuição 		dos gastos públicos e aumento" +
+						"da carga tributária. <br><br> Para maior <b>crescimento</b> e <b>nível de emprego </b>" + "aplica-se o sentido inverso do controle da inflação (mais gastos e menos tributação) " +
+						"<br><br> Para <b>melhor distribuição de renda</b> os instrumentos devem ser usados de forma " +
+						"seletiva, como isenção de alguns impostos para menos favorecidos ou gastos em programas" + "sociais.";
+					break;
+				case "POLÍTICA MONETÁRIA":
+
+
+					descricao = "Atuação do governo sobre quantidade de moeda, crédito e taxas de juros. " +
+						"É uma alternativa diferente à Política Fiscal, para as mesmas finalidades.";
+					influencia = "Para <b> controlar a inflação</b> a medida seria enxugar a quantidadede moedas. " +
+						"<br><br> Visando <b>crecimento economico</b> o inverso deveria ocorrer." +
+						"<br><br> Para o <b>nivel de empregos</b>, cada caso é um caso, mas poderia ocorrer do crescimento" +
+						"economico. " + "<br><br>Já para <b>distribuição de renda</b>, regulamentação de acesso ao crédito para menos favorecidos, com taxas de juros reduzidas (subsidiadas o que poderia envolver política fiscal/de gastos, caso fosse aplicada por bancos estatais, mas não se fosse regulamentação para iniciativa privada), " +
+						"seria um exemplo.";
+					break;
+
+				case "POLÍTICA CAMBIAL E COMERCIAL":
+					descricao = "Políticas relacionadas a fatores externos da economia. <br>" +
+						"A <b>cambial</b> se refere ao controle governamental sobre a taxa de câmbio" +
+						"<br>A <b>comercial</b> se refere aos instrumentos de incentivo (ou desmotivação) às importações ou exportações " +
+						" sejam eles fiscais, creditícios, estabeleciento de cotas, entre outros."
+						;
+					influencia = "O seu reflexo nas metas ainda que por muitas vezes não instântaneo influencia com a" + "competitividade da produção nacional no mercado externo e interno, o que" +
+						" influencia diretamente" + "	na inflação, na economia (mais competitivo exporta mais), " +
+						"no nível de empregos (em alguns cenários, por exemplo o real desvaloriza, salario do " +
+						"trabalhador fica mais barato e emprega-se mais).";
+
+					break;
+
+				case "POLÍTICA DE RENDAS":
+					descricao = "A fixação de algumas taxas como taxas de juros, cambial ou de algum tributo" +
+						"se encontra nas políticas fiscais, monetárias e cambiais." +
+						"<br>A <b> política de rendas</b> no entanto, é uma categoria exclusiva para <b>controle de " +
+						" de preços</b> e <b> controle de salários</b>.";
+					influencia = "Esses controles normalmente são utilizados, por motivos claros, para políticas de " +
+						"combate à inflação (congelamento de preços, etc)."
+
+					break;
+			}
+
+			document.getElementById("descricao").innerHTML = descricao;
+			document.getElementById("influencia").innerHTML = influencia;
+		}
+
+
+	</script>
+
+
+
+
+	<!--Rodapé -->
+	<footer id="rodape">
+
+	</footer>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="jquery.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

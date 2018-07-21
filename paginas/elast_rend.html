@@ -1,104 +1,132 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-      body{
-        color: blue;
-      }
-      p{
-        text-align: justify;
-      }
-    </style>
 
-    <title>Elasticidade-renda da demanda</title>
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="estilo.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    body {
+      color: blue;
+    }
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    p {
+      text-align: justify;
+    }
+  </style>
+
+  <title>Elasticidade-renda da demanda</title>
+  <!-- Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="estilo.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <header>
-  <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar  navbar-inverse navbar-transparente">
       <div class="container">
 
 
         <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
+          <li role="presentation" class="active">
+            <a href="../index.html">Home</a>
+          </li>
           <li role="presentation" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              Microeconomia <span class="caret"></span>
+              Microeconomia
+              <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="apresentacao_demanda.html">Demanda</a></li>
-              <li><a href="apresentacao_oferta.html">Oferta</a></li>
-              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
-              <li><a href="elasticidade.html">Elasticidade</a></li>
-         
+              <li>
+                <a href="apresentacao_demanda.html">Demanda</a>
+              </li>
+              <li>
+                <a href="apresentacao_oferta.html">Oferta</a>
+              </li>
+              <li>
+                <a href="equilibrio_mercado.html">Equilíbrio de Mercado</a>
+              </li>
+              <li>
+                <a href="elasticidade.html">Elasticidade</a>
+              </li>
+
             </ul>
-          </li>  
-          
+          </li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Macroeconomia
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="calculo_pib.html">PIB x PNB</a>
+              </li>
+              <li>
+                <a href="apresentacao_metas.html">Metas e Instrumentos</a>
+              </li>
+
+            </ul>
+          </li>
+
+
         </ul>
-          
-          
+
+
       </div>
-       
+
     </nav>
 
-    
-</header>
-    
+  </header>
 
-    <!--CONTEÚDO -->
-    <section id="conteudo">  
-      <div class="row">
-        <div class="col-sm-2">
-        </div>
-          <div class="col-sm-8">
-              <h2>Elasticidade-renda da Demanda</h2>
-             <br>
-           <p>Definição: <br>
-            Se trata da variação da quantidade procurada de um produto em razão de uma variação na renda do consumidor.
-          </p>
-		  <img id="form-cruz" src="imagens/elast-renda.jpg">
-			<br>
-			ERp > 1: bem superior => se a renda variar, o consumo deste bem sofre uma grande variação (mais que proporcional)
-			<br>
-			<br>
-			ERp > 0: bem normal => demanda aumenta quando a renda aumenta
-			<br>
-			<br>
-			ERp < 0: bem inferior => procura cai, caso ocorra uma elevação na renda do consumidor
-			<br>
-			<br>
-			ERp = 0: bem de consumo saciado => seja qual for a renda, o consumo deste bem permanece sempre o mesmo. 
-			Exemplificando, energia elétrica: mesmo que aumente ou diminua a renda, o consumidor sempre precisará de energia, 
-			somente em casos de grande diminuição da renda que há uma quantidade menor de energia gasta.
-          </div>
-        <div class="col-sm-2">
-        </div>
+
+  <!--CONTEÚDO -->
+  <section id="conteudo">
+    <div class="row">
+      <div class="col-sm-2">
       </div>
-     
-    </section>
+      <div class="col-sm-8" style="margin-top: 5%">
+        <h2>Elasticidade-renda da Demanda</h2>
+        <br>
+        <p>Definição:
+          <br> Se trata da variação da quantidade procurada de um produto em razão de uma variação na renda do consumidor.
+        </p>
+        <img id="form-cruz" src="imagens/elast-renda.jpg">
+        <br> ERp > 1: bem superior => se a renda variar, o consumo deste bem sofre uma grande variação (mais que proporcional)
+        <br>
+        <br> ERp > 0: bem normal => demanda aumenta quando a renda aumenta
+        <br>
+        <br> ERp
+        < 0: bem inferior=> procura cai, caso ocorra uma elevação na renda do consumidor
+          <br>
+          <br> ERp = 0: bem de consumo saciado => seja qual for a renda, o consumo deste bem permanece sempre o mesmo. Exemplificando,
+          energia elétrica: mesmo que aumente ou diminua a renda, o consumidor sempre precisará de energia, somente em casos
+          de grande diminuição da renda que há uma quantidade menor de energia gasta.
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+
+  </section>
 
 
-    <!--Rodapé -->
-    <footer id="rodape">
-     
-    </footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="jquery.min.js"></script>
+  <!--Rodapé -->
+  <footer id="rodape">
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  </body>
+  </footer>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="jquery.min.js"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
 </html>

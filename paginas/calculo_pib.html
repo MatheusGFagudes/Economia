@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+
+  <script src="Chart.min.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    #deflator input[type=number],
+    #pcp input[type=number] {
+      width: 150px;
+    }
+
+   
+
+    body {
+      color: blue;
+    }
+
+    input {
+      width: 10%;
+    }
+
+    p {
+      text-align: justify;
+    }
+  </style>
+
+  <title>PIB</title>
+  <!-- Bootstrap -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="estilo.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <header>
+    <nav class="navbar  navbar-inverse navbar-transparente">
+      <div class="container">
+
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active">
+            <a href="../index.html">Home</a>
+          </li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Microeconomia
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="apresentacao_demanda.html">Demanda</a>
+              </li>
+              <li>
+                <a href="apresentacao_oferta.html">Oferta</a>
+              </li>
+              <li>
+                <a href="equilibrio_mercado.html">Equilíbrio de Mercado</a>
+              </li>
+              <li>
+                <a href="elasticidade.html">Elasticidade</a>
+              </li>
+
+            </ul>
+          </li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Macroeconomia
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="calculo_pib.html">PIB x PNB</a>
+              </li>
+              <li>
+                <a href="apresentacao_metas.html">Metas e Instrumentos</a>
+              </li>
+
+            </ul>
+          </li>
+
+
+        </ul>
+
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!--CONTEÚDO -->
+  <section id="conteudo">
+    <br>
+    <br>
+    <div class="container">
+      <fieldset>
+        <legend> PIB</legend>
+
+      </fieldset>
+      <ul class="nav nav-pills">
+        <li class="active">
+          <a data-toggle="tab" href="#home">Definição</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#menu1">PIB per capita</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#menu2">PIB Real e PIB Nominal</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#menu3">PNB</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+          <div class="container">
+            <div class="col-sm-12">
+
+
+              <h3>Definição:</h3>
+              <p>
+                <br> O Produto Interno Bruto (PIB) é o valor de mercado de todos os bens e serviços finais produzidos em um país,
+                em um determinado período de tempo, geralmente sendo calculado anualmente. É importante lembrar que os bens
+                e serviços intermediários utilizados na produção dos bens e serviços finais não entram no cálculo. As despesas
+                totais internas de um país é gerada a partir da soma das quatro variáveis abaixo, sendo o consumo privado
+                referentes ao consumo das famílias; os investimentos sãs as despesas para criação de novos capitais de empresas;
+                a despesas do governo feitas a partir da arrecadação de impostos e utilização dos bens públicos e as exportações
+                líquidas se refere a diferença entre as exportações e as importações do país.
+                <br>
+                <h3>
+                  <strong>
+                    <center>PIB = C + G + O + Q - M</center>
+                  </strong>
+                </h3>
+                <button data-toggle="collapse" data-target="#pib" class="btn btn-primary">Calcula PIB</button>
+                <div id="pib" class="collapse">
+                  <br>
+                  <input id="c" placeholder="C" type="number"> +
+                  <input id="g" placeholder="G" type="number"> +
+                  <input id="o" placeholder="O" type="number"> +
+                  <input id="q" placeholder="Q" type="number"> -
+                  <input id="m" placeholder="M" type="number">
+                  <button onclick="calculapib();" class="btn btn-primary">Calcular</button>
+                  <h3 id="resposta"></h3>
+                </div>
+                <h4> Variáveis: </h4>
+                C = CONSUMO PRIVADO
+                <br> G = CONSUMO PÚBLICO
+                <br> O = INVESTIMENTO
+                <br> Q = EXPORTAÇÃO
+                <br> M = IMPORTAÇÃO
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+          <div class="container">
+            <div class="col-sm-12">
+              <h3>PIB per capita</h3>
+              <br>
+              <p>
+                O PIB per capita é igual ao PIB de um país dividido pelo número de habitantes de sua região, mostrando a renda e despesas
+                médias de um indivíduo da economia. O PIB per capita é usado como um indicador de bem-estar econômico, porém
+                este indicador não deve ser usado isoladamente, pois ele não demonstra a desigualdade de renda entre os habitantes
+                mais pobres do mais ricos. Normalmente o aumento do PIB per capita segue o aumento de outros indicadores
+                de bem-estar como a esperança de vida e IDH, porém há várias exceções, como em países em alto desenvolvimento,
+                que podem ter grandes PIB per capita, porém seus outros indicadores como IDH e alfabetização se mantém baixos
+                ou como em países muito populosos como a China, em que seu PIB per capita não é tão grande, mas seus outros
+                indicadores são elevados.
+              </p>
+              <br>
+              <h3>
+                <strong>
+                  <center>PIB per capita = PIB / número de habitantes</center>
+                </strong>
+              </h3>
+              <br>
+
+              <button data-toggle="collapse" data-target="#pcp" class="btn btn-primary">Calcula PIB per capita</button>
+              <div id="pcp" class="collapse">
+                <br>
+                <input id="pb" placeholder="PIB" type="number"> /
+                <input id="nh" placeholder="Numero de habitantes" type="number">
+                <button onclick="calculaPcb();" class="btn btn-primary">Calcular</button>
+                <h3 id="resposta3"></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+
+          <div class="container">
+            <div class="col-sm-12">
+              <h3>PIB Real e PIB Nominal:</h3>
+              <p>
+                <br> Para uma melhor análise do comportamento do PIB de um país ao passar dos anos, é recomendado diferenciar
+                seu PIB Nominal, do PIB Real. O PIB Normial, usa o valor dos preços correntes, do ano que o serviço ou produto
+                foi produzido e comercializado, sendo assim, afetado pela inflação atual. Já o PIB Real usa preços constantes,
+                é escolhido um ano base, retirando o efeito da inflação de cada ano. É tulizado o PIB Real para análises
+                mais consistente da variação do PIB, pois ele apenas avalia as variação nas quantias produzidas de bens e
+                produtos, sem a alteração nos preços de mercado, para isso, é necessário o uso de um deflator, que indica
+                o índice de preços utilizado para descontar o aumento ou queda dos preços, tendo assim, apenas o crescimento
+                real das riquezas produzidas.
+                <br> O deflator é calculado de tal maneira:
+                <br>
+                <h3>
+                  <strong>
+                    <center>Deflator = ( PIB Nominal / PIB Real ) * 100</center>
+                  </strong>
+                </h3>
+                <button data-toggle="collapse" data-target="#deflator" class="btn btn-primary">Calcula Deflator</button>
+                <div id="deflator" class="collapse">
+                    <br> (
+                  <input id="pn" placeholder="PIB Nominal" type="number"> /
+                  <input id="pr" placeholder="PIB Real" type="number"> )
+                  <button onclick="calculadefla();" class="btn btn-primary">Calcular</button>
+                  <h3 id="resposta2"></h3>
+                </div>
+                <br>
+
+                <br> No ano base, o PIB Real e o PIB Nominal serão iguais, e o deflator será cem. Para o cálculo da taxa de inflação
+                de um ano, normalmente e usado o deflator do PIB do ano, em relação ao do ano anterior.
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+          <div class="container">
+
+
+            <div class="col-sm-12">
+              <h3>PNB</h3>
+              <br>
+              <p>
+                O Produto Nacional Bruto (PNB) é a soma de todas as riquezas produzidas por um país de um período específico, seja ele produzido
+                no território deste país ou em seu exterior, ou seja, empresas no exterior também participam da soma deste
+                indicador. O PNB é calculado pela diferença entre o PIB e a renda líquida enviada ao exterior, esta renda
+                líquida, por sua vez, é a diferença entre os recursos enviados ao exterior, como empresas multinacionais
+                alocadas no país em questão, e os recursos recebidos do exterior, no caso de empresas provenientes deste
+                país que se encontram em outros países.
+                <br> Se um país tiver seus PNB maior que seu PIB, sua renda líquida enviada ao exterior é negativa e isso significa
+                que são recebidos mais recursos exteriores do que recursos próprios são enviados para o exterior. Já quando
+                o PNB é menor que o PIB, sua renda líquida enviada ao exterior é positiva e são enviados mais recursos para
+                o exterior do que são recebidos dele, por exemplo, se um país tem muitas fábricas multinacionais estrangeiras
+                alocadas em seu território, mas não instala empresas e fábricas suas em outros países.
+                <br>
+                <h3>
+                  <strong>
+                    <center>PNB = PIB - Renda Líquida Enviada ao Exterior</center>
+                  </strong>
+                </h3>
+                <button data-toggle="collapse" data-target="#PIBN" class="btn btn-primary">Calcula PNB</button>
+                <div id="PIBN" class="collapse">
+                  <br>
+                  <input id="pib2" placeholder="PIB" type="number"> -
+                  <input id="rlee" placeholder="RLEE" type="number">
+                  <button onclick="calculadePnb();" class="btn btn-primary">Calcular</button>
+                  <h3 id="resposta4"></h3>
+                </div>
+
+                <br>
+              </p>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+  <script>
+
+  </script>
+  <!--Rodapé -->
+  <footer id="rodape">
+
+  </footer>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="jquery.min.js"></script>
+  <script>
+
+
+    function calculadefla() {
+      var resposta = (parseInt(document.getElementById("pn").value) / parseInt(document.getElementById("pr").value)) * 100;
+      if (!isNaN(resposta)) {
+        document.getElementById("resposta2").innerHTML = 'Valor do deflator é ' + resposta;
+      }
+      else {
+
+        alert("Insira todos os valores válidos!")
+      }
+
+    }
+    function calculapib() {
+      var resposta = parseInt(document.getElementById("c").value) + parseInt(document.getElementById("g").value) + parseInt(document.getElementById("o").value) + parseInt(document.getElementById("q").value) - parseInt(document.getElementById("m").value);
+      if (!isNaN(resposta)) {
+        document.getElementById("resposta").innerHTML = 'Valor do PIB é ' + resposta;
+      }
+      else {
+
+        alert("Insira todos os valores válidos!")
+      }
+
+    }
+    function calculaPcb() {
+      var resposta = parseInt(document.getElementById("pb").value) / parseInt(document.getElementById("nh").value);
+      if (!isNaN(resposta)) {
+        document.getElementById("resposta3").innerHTML = 'Valor do PIB per capita é ' + resposta;
+      }
+      else {
+
+        alert("Insira todos os valores válidos!")
+      }
+
+    }
+    function calculadePnb() {
+      var resposta = parseInt(document.getElementById("pib2").value) - parseInt(document.getElementById("rlee").value);
+      if (!isNaN(resposta)) {
+        document.getElementById("resposta4").innerHTML = 'Valor do PNB ' + resposta;
+      }
+      else {
+
+        alert("Insira todos os valores válidos!")
+      }
+
+    }
+
+
+  </script>
+
+  <script> 
+    $(document).ready(function () {
+      $("input").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+          // Allow: Ctrl/cmd+A
+          (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+          // Allow: Ctrl/cmd+C
+          (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+          // Allow: Ctrl/cmd+X
+          (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+          // Allow: home, end, left, right
+          (e.keyCode >= 35 && e.keyCode <= 39)) {
+          // let it happen, don't do anything
+          return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

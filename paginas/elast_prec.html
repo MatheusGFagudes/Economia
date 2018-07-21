@@ -1,76 +1,131 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-      body{
-        color: blue;
-      }
-      p{
-        text-align: justify;
-      }
-    </style>
 
-    <title>Elasticidade-preço da oferta</title>
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="estilo.css" rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		body {
+			color: blue;
+		}
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
+		p {
+			text-align: justify;
+		}
+	</style>
+
+	<script src="Chart.min.js"></script>
+
+	<title>Elasticidade-preço da demanda</title>
+	<!-- Bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="estilo.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <header>
-    <nav class="navbar navbar-fixed-top navbar-inverse navbar-transparente">
-      <div class="container">
+</head>
+
+<body>
+	<header>
+		<nav class="navbar  navbar-inverse navbar-transparente">
+			<div class="container">
 
 
-        <ul class="nav nav-tabs">
-          <li role="presentation" class="active"><a href="../index.html">Home</a></li>
-          <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              Microeconomia <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="apresentacao_demanda.html">Demanda</a></li>
-              <li><a href="apresentacao_oferta.html">Oferta</a></li>
-              <li><a href="equilibrio_mercado.html">Equilíbrio de Mercado</a></li>
-              <li><a href="elasticidade.html">Elasticidade</a></li>
-         
-            </ul>
-          </li>  
-          
-        </ul>
-          
-          
-      </div>
-       
-    </nav>
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="../index.html">Home</a>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							Microeconomia
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="apresentacao_demanda.html">Demanda</a>
+							</li>
+							<li>
+								<a href="apresentacao_oferta.html">Oferta</a>
+							</li>
+							<li>
+								<a href="equilibrio_mercado.html">Equilíbrio de Mercado</a>
+							</li>
+							<li>
+								<a href="elasticidade.html">Elasticidade</a>
+							</li>
 
-    
-</header>
-    
+						</ul>
+					</li>
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							Macroeconomia
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="calculo_pib.html">PIB x PNB</a>
+							</li>
+							<li>
+								<a href="apresentacao_metas.html">Metas e Instrumentos</a>
+							</li>
 
-    <!--CONTEÚDO -->
-    <section id="conteudo">  
-      <div class="row">
-        <div class="col-sm-2">
-        </div>
-          <div class="col-sm-8">
-              <h2>Elasticidade-preço da Oferta</h2>
-             <br>
-           <p>Definição: <br>
-            É a variação na demanda do produto quando há alguma alteração no preço do bem ou do serviço, ou seja, 
-			é o comportamento dos consumidores caso ocorra variação no preço de determinado bem.
-          </p>
-		  <img id="form-demanda" src="imagens/elast-preco.jpg">
-			<br>
+						</ul>
+					</li>
+
+
+				</ul>
+
+
+			</div>
+
+		</nav>
+
+	</header>
+
+	<!--CONTEÚDO -->
+	<section id="conteudo">
+		<div class="row">
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-8" style="margin-top: 5%">
+				<h2>Elasticidade-preço da Demanda</h2>
+				<br>
+				<p>Definição:
+					<br> É a variação na demanda do produto quando há alguma alteração no preço do bem ou do serviço, ou seja, é o comportamento
+					dos consumidores caso ocorra variação no preço de determinado bem.
+				</p>
+
+				<form id="chk-grafico" style="margin-bottom: 1%">
+
+					<input id="exibir" type="checkbox" name="exibe" onclick="troca()">
+					<span class="checkboxtext">
+						Exibe gráfico
+					</span>
+				</form>
+
+				<canvas id="myChart" style="display: none"></canvas>
+
+				<img id="form-demanda" src="imagens/elast-preco.jpg">
+
+				<div id="botaoSetas" style="display: none">
+					<button type="button" id="cima" class="btn btn-default" aria-label="seta pra cima">
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoSobe" style="display: inline"></p>
+					<br>
+					<button type="button" id="baixo" class="btn btn-default" aria-label="seta pra baixo">
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+					</button>
+					<p id="textoBotaoDesce" style="display: inline"></p>
+				</div>
+
+				<!--<br>
 			a) Demanda Elástica: | Epp | > 1
 			Revela que a demanda é altamente sensível a mudanças no preço, sempre com a quantidade variando em sentido contrário ao preço.
 			<br>
@@ -78,27 +133,315 @@
 			Essa elasticidade mostra que os consumidores não são muito afetados em caso de variação no preço.
 			<br>
 			c) Demanda de elasticidade unitária: | Epp | = 1
-			Neste caso há uma variação de igual proporção da quantidade demandada em relação ao preço, ou seja, se o preço de um serviço aumenta em 5%, a demanda diminui igualmente em 5%.
+			Neste caso há uma variação de igual proporção da quantidade demandada em relação ao preço, 
+			ou seja, se o preço de um serviço aumenta em 5%, a demanda diminui igualmente em 5%.
 
 			<br>
-			<br>
-          </div>
-        <div class="col-sm-2">
-        </div>
-      </div>
-     
-    </section>
+			<br>-->
+				<p id="descricao" style="margin-top: 1%"> </p>
+			</div>
+			<div class="col-sm-2">
+			</div>
+		</div>
+
+	</section>
+
+	<script>
 
 
-    <!--Rodapé -->
-    <footer id="rodape">
-     
-    </footer>
+		function troca() {
+			var ctx = document.getElementById("myChart").getContext("2d");
+			var graficoBase;
+			var descricao = "";
+			var chart;
+			var desc_cima;
+			var desc_baixo;
+			var textoBotaoSobe;
+			var textoBotaoDesce;
+			var check = document.getElementById("exibir");
+			var graf = 3;
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="jquery.min.js"></script>
+			if (check.checked == true) {
+				document.getElementById("botaoSetas").style.display = "block";
+				document.getElementById("form-demanda").style.display = "none";
+				document.getElementById("myChart").style.display = "block";
+				graficoBase = defineMinhaConfig("Demanda elasticamente unitária");
+				chart = new Chart(ctx, graficoBase);
+				var descricao = "Eps = 1: Demanda elasticamente unitária";
+				textoBotaoSobe = "Aumenta elasticidade";
+				textoBotaoDesce = "Diminui elasticidade";
+				textoBotaoMeio = "Resetar";
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-  </body>
+				//var desc_cima;
+				//var desc_baixo;
+
+
+
+				document.getElementById("baixo").onclick = function () {
+					if (graf > 1) { graf = graf - 1; }
+					botao_baixo(graficoBase, chart, graf);
+
+				}
+
+				document.getElementById("cima").onclick = function () {
+					if (graf < 5) { graf = graf + 1; }
+					botao_cima(graficoBase, chart, graf);
+
+				}
+
+
+				//document.getElementById("baixo").onclick = function() { diminui_elast(graficoBase,chart, desc_baixo);}
+				//document.getElementById("cima").onclick = function() { aumenta_elast(graficoBase,chart, desc_cima);}
+
+				document.getElementById("descricao").innerHTML = descricao;
+				document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+
+			}
+			else {
+
+				document.getElementById("botaoSetas").style.display = "none";
+				document.getElementById("form-demanda").style.display = "block";
+				document.getElementById("myChart").style.display = "none";
+
+			}
+
+
+			document.getElementById("descricao").innerHTML = descricao;
+			document.getElementById("textoBotaoSobe").innerHTML = textoBotaoSobe;
+			document.getElementById("textoBotaoDesce").innerHTML = textoBotaoDesce;
+		}
+
+		function botao_cima(graficoBase, chart, graf) {
+
+			var desc_max = "Demanda completamente elástica: | Epp | = ∞ (Infinito)";
+			var desc_cima = "Demanda Elástica: | Epp | > 1 " +
+				"Revela que a demanda é altamente sensível a mudanças no preço, sempre com a quantidade variando em sentido contrário ao preço.";
+			var desc_meio = "Demanda de elasticidade unitária: | Epp | = 1 " +
+				"Neste caso há uma variação de igual proporção da quantidade demandada em relação ao preço, " +
+				"ou seja, se o preço de um serviço aumenta em 5%, a demanda diminui igualmente em 5%.";
+			var desc_baixo = "Demanda Inelástica: | Epp | < 1 " +
+				"Essa elasticidade mostra que os consumidores não são muito afetados em caso de variação no preço.";
+			var desc_min = "Demanda completamente inelástica: | Epp | = 0. ";
+
+			if (graf == 5) {
+				aumenta(graficoBase, chart, desc_max);
+			} else if (graf == 4) {
+				aumenta_elast(graficoBase, chart, desc_cima);
+			} else if (graf == 3) {
+				troca();
+			} else if (graf == 2) {
+				diminui_elast(graficoBase, chart, desc_baixo);
+			}
+		}
+
+		function botao_baixo(graficoBase, chart, graf) {
+			var desc_max = "Demanda completamente elástica: | Epp | = ∞ (Infinito)";
+			var desc_cima = "Demanda Elástica: | Epp | > 1 " +
+				"Revela que a demanda é altamente sensível a mudanças no preço, sempre com a quantidade variando em sentido contrário ao preço.";
+			var desc_meio = "Demanda de elasticidade unitária: | Epp | = 1 " +
+				"Neste caso há uma variação de igual proporção da quantidade demandada em relação ao preço, " +
+				"ou seja, se o preço de um serviço aumenta em 5%, a demanda diminui igualmente em 5%.";
+			var desc_baixo = "Demanda Inelástica: | Epp | < 1 " +
+				"Essa elasticidade mostra que os consumidores não são muito afetados em caso de variação no preço.";
+			var desc_min = "Demanda completamente inelástica: | Epp | = 0. ";
+
+			if (graf == 4) {
+				aumenta_elast(graficoBase, chart, desc_cima);
+			} else if (graf == 3) {
+				troca();
+			} else if (graf == 2) {
+				diminui_elast(graficoBase, chart, desc_baixo);
+			} else if (graf == 1) {
+				diminui(graficoBase, chart, desc_min);
+			}
+		}
+
+		function defineMinhaConfig(mylabel) {
+
+			var config = {
+				type: 'line',
+
+				// The data for our dataset
+				data: {
+
+					labels: [0, 10, 20, 30, 40, 50],
+					datasets: [{
+						label: mylabel,
+						borderColor: 'rgb(255, 69, 132)',
+						data: [null, 50, 40, 30, 20, null],
+					}
+
+					]
+				},
+
+				options: {
+					scales: {
+						xAxes: [{
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: 'Q(i)',
+								data: [20, 30, 50]
+							}
+						}],
+						yAxes: [{
+							display: true,
+							ticks: {
+								beginAtZero: true,
+								steps: 10,
+								stepValue: 5,
+								max: 70
+							},
+							scaleLabel: {
+								display: true,
+								labelString: 'P(i)'
+							}
+						}]
+					},
+					title: {
+						display: true,
+						text: "Elasticidade-preço da demanda"
+					}
+				}
+			};
+			return config;
+		}
+
+		function aumenta(config, chart, texto) {
+			var label_subida = "Demanda infinitamente elástica";
+			var novo = {
+
+				label: label_subida,
+				borderColor: 'rgb(255, 69, 132)',
+				data: [null, 40, 40, 40, 40, null]
+			}
+
+			config.data.datasets[0] = novo;
+
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+		}
+
+		function aumenta_elast(config, chart, texto) {
+			var label_subida = "Demanda elástica";
+			//if(config.data.datasets.length < 2){
+			var novo = {
+				label: label_subida,
+				borderColor: 'rgb(255, 69, 132)',
+				data: [null, 42, 38, 34, 30, null]
+			}
+
+
+			//for (var i=1; i<novo.data.length - 1; i++){
+			//	novo.data[i] = config.data.datasets[0].data[i] - 10 + i*5;
+			//}
+			//config.data.datasets.push(novo);
+			config.data.datasets[0] = novo;
+
+			//}
+			//else if(config.data.datasets[1].label != label_subida){
+			//	config.data.datasets[1].borderColor = 'rgb(255, 69, 132)';
+			//	config.data.datasets[1].label = label_subida;
+			//	for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+			//		config.data.datasets[1].data[i] = config.data.datasets[0].data[i] - 10 + i*5;
+
+			//	}
+
+
+			//}
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+		function meio(config, chart, texto) {
+			var label_subida = "Demanda elasticamente unitária";
+			var novo = {
+				label: label_subida,
+				borderColor: 'rgb(255, 69, 132)',
+				data: [null, 50, 40, 30, 20, null]
+			}
+
+			config.data.datasets[0] = novo;
+
+			chart.update();
+			document.getElementById("descricao").innerHTML = texto;
+		}
+
+		function diminui_elast(config, chart, texto) {
+			var label_descida = "Demanda inelástica";
+			if (config.data.datasets.length < 2) {
+				var novo = {
+					label: label_descida,
+					borderColor: 'rgb(255, 69, 132)',
+					data: [null, 65, 45, 25, 5, null]
+				}
+
+
+				//for (var i=1; i<novo.data.length - 1; i++){
+				//	novo.data[i] = config.data.datasets[0].data[i] + 25 - i*10;
+				//	if(novo.data[i]<0){
+				//		novo.data[i]= 0;
+				//	}
+				//}
+				//config.data.datasets.push(novo);
+				config.data.datasets[0] = novo;
+
+			}
+
+			//else if(config.data.datasets[1].label != label_descida){
+			//	config.data.datasets[1].label = label_descida;
+			//	config.data.datasets[1].borderColor = 'rgb(255, 69, 132)'
+			//	for (var i=1; i<config.data.datasets[1].data.length - 1; i++){
+			//		config.data.datasets[1].data[i] = config.data.datasets[0].data[i] + 25 - i*10;
+
+			//	}
+
+
+			//}
+			chart.update();
+
+			document.getElementById("descricao").innerHTML = texto;
+		}
+
+		function diminui(config, ctx, texto) {
+			var label_subida = "Demanda infinitamente inelástica"
+
+			var novo = {
+				label: label_subida,
+				borderColor: 'rgb(255, 69, 132)',
+				backgroundColor: 'rgba(0, 0, 0, 0)',
+				steppedLine: true,
+				data: [null, null, 70, 0, null, null]
+			}
+
+
+
+
+
+
+			config.data.datasets[0] = novo;
+
+
+
+
+			ctx.update();
+			document.getElementById("descricao").innerHTML = texto;
+
+		}
+
+	</script>
+
+	<!--Rodapé -->
+	<footer id="rodape">
+
+	</footer>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="jquery.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+
 </html>
